@@ -1,0 +1,112 @@
+% \documentclass[12pt]{article}
+\documentclass[11pt]{article}
+%\usepackage{wallpaper}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage[top=1in, bottom=1.in, left=1.in, right=1.in]{geometry}
+
+% \usepackage{unicode-math}
+% \setmathfont{XITS Math}
+% 
+% \pagestyle{empty}
+% \setlength\parindent{0pt}
+
+\begin{document}
+
+%\vspace{1.5cm}
+\hfill{Buenos Aires, \today} \\
+
+\begin{center}
+Modificación a funciones $Y^k(a,b,r)$ 
+\end{center}
+
+\section{Las funciones $Y^k(a,b,r)$}
+
+% &= \iint_0^{\infty}{ P_a(r_1)P_b(r_2)\frac{1}{\left|r_1-r_2\right|}P_a(r_2)P_b(r_1)} \\
+%  &= \int_0^{\infty} P_a(r_1)P_b(r_1) \left[ \int_0^{\infty} \frac{P_b(r_2)P_b(r_2)}{\left|r_1-r_2\right|}\,dr_2 \right] dr_1\\
+Por definición,
+\begin{align}
+ \frac{Y_{ab}^k(r) }{r}
+ &= \int_0^{\infty} \frac{r_<^k}{r_>^{k+1}}P_a(t)P_b(t)\,dt \\
+ &= \int_0^r \frac{t^k}{r^{k+1}} P_a(t)P_b(t)\,dt 
+  + \int_r^{\infty} \frac{r^k}{t^{k+1}} P_a(t)P_b(t)\,dt \\
+ &=\frac{1}{r} \left[ \int_0^r \left(\frac{t}{r}\right)^k P_a(t)P_b(t)\,dt
+  + \int_r^{\infty} \left(\frac{r}{t}\right)^{k+1} P_a(t)P_b(t)\,dt \right]\\
+ Y_{ab}^k(r) 
+ &= \frac{1}{r^k} \int_0^r t^k P_a(t)P_b(t)\,dt
+  + r^{k+1} \int_r^{\infty} \frac{P_a(t)P_b(t)}{t^{k+1}}\,dt \,.
+\end{align}
+Definiendo,
+\begin{align}
+ Z_{ab}^k(r) &= \frac{1}{r^k} \int_0^r t^k P_a(t)P_b(t)\,dt\,.
+\label{eq:Zabk}
+\end{align}
+Finalmente,
+\begin{align}
+ Y_{ab}^k(r) &= Z_{ab}^k(r) 
+ + r^{k+1} \int_r^{\infty} \frac{P_a(t)P_b(t)}{t^{k+1}}\,dt \,.
+\label{eq:Yabk}
+\end{align}
+
+\subsection{Ecuaciones diferenciales de $Y^k(a,b,r)$}
+Derivando $Z_{ab}^k(r)$, tenemos
+\begin{align}
+ \frac{d}{dr} Z_{ab}^k(r) 
+ &= \frac{d}{dr} \left[ \frac{1}{r^k} \int_0^r t^k P_a(t)P_b(t)\,dt \right] \\
+ &= -\frac{k}{r^{k+1}}\int_0^r t^k P_a(t)P_b(t)\,dt + \frac{1}{r^k} \left[ r^k P_a(r)P_b(r) \right] \\
+ &= P_a(r)P_b(r) -\frac{k}{r^{k+1}}\int_0^r t^k P_a(t)P_b(t)\,dt \\
+ &= P_a(r)P_b(r) - \frac{k}{r} Z_{ab}^k(r)  \,.
+\end{align}
+En donde se usa el hecho que
+\begin{align}
+ \frac{d}{dr} \int_0^r f(t)\,dt = f(r)\,.
+\end{align}
+Derivando $Y_{ab}^k(r)$, tenemos
+\begin{align}
+ \frac{d}{dr} Y_{ab}^k(r) 
+ &= \frac{d}{dr} \left[ Z_{ab}^k(r) 
+ + r^{k+1} \int_r^{\infty} \frac{P_a(t)P_b(t)}{t^{k+1}}\,dt \right] \\
+ &= \frac{d}{dr} Z_{ab}^k(r) + (k+1) r^k \int_r^{\infty} \frac{P_a(t)P_b(t)}{t^{k+1}}\,dt 
+ - r^{k+1}\left[ \frac{1}{r^{k+1}} P_a(r)P_b(r) \right] \\
+ &= \left[ P_a(r)P_b(r) - \frac{k}{r} Z_{ab}^k(r) \right]
+ + (k+1) r^k \int_r^{\infty} \frac{P_a(t)P_b(t)}{t^{k+1}}\,dt - P_a(r)P_b(r) \\
+ &= -\frac{k}{r} Z_{ab}^k(r) 
+ + (k+1) r^k \int_r^{\infty} \frac{P_a(t)P_b(t)}{t^{k+1}}\,dt \\
+ &= -\frac{k}{r} Z_{ab}^k(r)  \left[ - \frac{k+1}{r} Z_{ab}^k(r) + \frac{k+1}{r} Z_{ab}^k(r) \right]
+ + (k+1) r^k \int_r^{\infty} \frac{P_a(t)P_b(t)}{t^{k+1}}\,dt  \\
+ &= -\frac{2k+1}{r} Z_{ab}^k(r) + \frac{k+1}{r} Z_{ab}^k(r)
+ + \frac{k+1}{r} r^{k+1} \int_r^{\infty} \frac{P_a(t)P_b(t)}{t^{k+1}}\,dt \\
+ &= -\frac{2k+1}{r} Z_{ab}^k(r) + \frac{k+1}{r} \left[ Z_{ab}^k(r)
+ + r^{k+1} \int_r^{\infty} \frac{P_a(t)P_b(t)}{t^{k+1}}\,dt \right] \\
+ &= -\frac{2k+1}{r} Z_{ab}^k(r) + \frac{k+1}{r} Y_{ab}^k(r)\,.
+\end{align}
+
+Siendo $r=e^{\rho}$,
+\begin{align}
+ \frac{df^k}{dr}=\frac{df^k}{d\rho}\frac{d\rho}{dr} \quad\rightarrow\quad 
+ \frac{df^k}{d\rho}=\frac{df^k}{dr}\frac{dr}{d\rho}\,,
+\end{align}
+y $\frac{dr}{d\rho}=r$, entonces
+\begin{align}
+ \frac{df^k}{d\rho}=r\frac{df^k}{dr}\,.
+\end{align}
+Además, siendo $P_i(r)=\sqrt{r}\,\overline{P}_i(\rho)$
+\begin{align}
+ \frac{d}{d\rho} Z_{ab}^k &=  r^2\,\overline{P}_a(\rho)\overline{P}_b(\rho) - k Z_{ab}^k(\rho)\,, \\
+ \frac{d}{d\rho} Y_{ab}^k &=  -(2k+1) Z_{ab}^k(\rho) + (k+1) Y_{ab}^k(\rho)\,.
+\end{align}
+
+\subsection{Factor de integración}
+Siendo $f_1$ el factor de integración de $Z_{ab}^k$, entonces
+\begin{align}
+ \frac{d\,f_1\,Z_{ab}^k}{d\rho} 
+ &= \frac{df_1}{d\rho} Z_{ab}^k + f_1 \frac{d}{d\rho} Z_{ab}^k \\
+\end{align}
+
+
+
+
+
+\end{document}
